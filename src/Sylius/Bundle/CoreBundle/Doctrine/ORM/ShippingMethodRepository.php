@@ -43,7 +43,6 @@ class ShippingMethodRepository extends BaseShippingMethodRepository implements S
             ->leftJoin('o.rules', 'rules')
             ->andWhere('o.zone IN (:zones)')
             ->setParameter('zones', $zones)
-            ->addOrderBy('o.position', 'ASC')
             ->getQuery()
             ->getResult()
         ;
@@ -57,6 +56,7 @@ class ShippingMethodRepository extends BaseShippingMethodRepository implements S
             ->andWhere(':channel MEMBER OF o.channels')
             ->setParameter('channel', $channel)
             ->setParameter('enabled', true)
+            ->addOrderBy('o.position', 'ASC')
         ;
     }
 }
